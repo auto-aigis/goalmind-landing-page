@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { goalsApi } from '../../_lib/api';
 import type { GoalType } from '../../_lib/types';
 
@@ -105,29 +104,31 @@ export default function OnboardingPage() {
           )}
 
           {step === 0 && (
-            <RadioGroup
-              value={formData.goalType}
-              onValueChange={(v) => setFormData({ ...formData, goalType: v as GoalType })}
-              className="grid gap-3"
-            >
+            <div className="grid gap-3">
               {goalTypes.map((gt) => {
                 const Icon = gt.icon;
+                const isSelected = formData.goalType === gt.value;
                 return (
-                  <label
+                  <button
                     key={gt.value}
-                    className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-colors ${
-                      formData.goalType === gt.value
+                    onClick={() => setFormData({ ...formData, goalType: gt.value })}
+                    className={`flex items-center gap-3 p-4 border rounded-lg transition-colors text-left ${
+                      isSelected
                         ? 'border-teal-600 bg-teal-50'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <RadioGroupItem value={gt.value} />
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      isSelected ? 'border-teal-600 bg-teal-600' : 'border-gray-300'
+                    }`}>
+                      {isSelected && <Check className="w-3 h-3 text-white" />}
+                    </div>
                     <Icon className="w-5 h-5 text-gray-500" />
                     <span className="font-medium text-gray-900">{gt.label}</span>
-                  </label>
+                  </button>
                 );
               })}
-            </RadioGroup>
+            </div>
           )}
 
           {step === 1 && (
