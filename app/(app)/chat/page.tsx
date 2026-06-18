@@ -70,10 +70,10 @@ export default function ChatPage() {
     try {
       const newCheckIn = await checkInsApi.create(selectedGoalId);
       setCheckIn(newCheckIn);
-      const welcomeMsg: Message = {
+const welcomeMsg: Message = {
         role: 'assistant',
         content:
-          "Good to see you! Let's check in on your progress. How did things go since our last conversation?",
+          "Good to see you! Let&apos;s check in on your progress. How did things go since our last conversation?",
       };
       setMessages([welcomeMsg]);
     } catch (err) {
@@ -116,7 +116,7 @@ export default function ChatPage() {
   if (goals.length === 0) {
     return (
       <div className="max-w-2xl mx-auto py-8 text-center">
-        <p className="text-gray-500 mb-4">You don't have any active goals yet.</p>
+<p className="text-gray-500 mb-4">You don&apos;t have any active goals yet.</p>
         <Button onClick={() => router.push('/onboarding')}>Create Your First Goal</Button>
       </div>
     );
