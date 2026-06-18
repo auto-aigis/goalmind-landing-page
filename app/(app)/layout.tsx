@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { AuthProvider, useAuth } from '../_components/AuthProvider';
+import { useAuth } from '../_components/AuthProvider';
 import { AppShell } from '../_components/AppShell';
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
@@ -29,9 +29,5 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <AuthProvider>
-      <AuthGuard>{children}</AuthGuard>
-    </AuthProvider>
-  );
+  return <AuthGuard>{children}</AuthGuard>;
 }
