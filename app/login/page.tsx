@@ -9,11 +9,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { authApi } from '../_lib/api';
-import { useAuth } from '../_components/AuthProvider';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { refresh } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,7 +26,7 @@ export default function LoginPage() {
 
     try {
       await authApi.login(email, password);
-      await refresh();
+      await authApi.me();
       router.push('/dashboard');
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Login failed';
